@@ -15,10 +15,12 @@ const EventPlansAdmin = () => {
 
   const fetchData = async () => {
     const plansRes = await fetch(`${import.meta.env.VITE_API_URL}/plans`);
-    setPlans(await plansRes.json());
+    const plansData = await plansRes.json();
+    setPlans(plansData.data || plansData);
 
     const typesRes = await fetch(`${import.meta.env.VITE_API_URL}/event-types`);
-    setEventTypes(await typesRes.json());
+    const typesData = await typesRes.json();
+    setEventTypes(typesData.data || typesData);
   };
 
   useEffect(() => {
@@ -42,7 +44,6 @@ const EventPlansAdmin = () => {
       },
       body: fd,
     });
-
     setForm({ name: "", price: "", offer: "", eventType: "" });
     setMedia(null);
     fetchData();
@@ -121,23 +122,25 @@ const EventPlansAdmin = () => {
       </form>
 
       {/* PLAN LIST */}
-      {plans.map((p) => (
-        <div key={p._id} className="admin-card plan-card-admin">
-          <div className="plan-info">
-            <strong>{p.name}</strong> — ₹{p.price}
-            <div>Event: {p.eventType}</div>
-            {p.offer && <div>Offer: {p.offer}</div>}
-          </div>
+      {plans
+        .filter((p) => p.isActive !== false)
+        .map((p) => (
+          <div key={p._id} className="admin-card plan-card-admin">
+            <div className="plan-info">
+              <strong>{p.name}</strong> — ₹{p.price}
+              <div>Event: {p.eventType}</div>
+              {p.offer && <div>Offer: {p.offer}</div>}
+            </div>
 
-          <button
-            type="button"
-            className="danger"
-            onClick={() => disablePlan(p._id)}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+            <button
+              type="button"
+              className="danger"
+              onClick={() => disablePlan(p._id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
     </>
   );
 };
