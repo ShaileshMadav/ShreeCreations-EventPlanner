@@ -82,7 +82,7 @@ const Home = () => {
 
           <div className="cta-row">
             <a
-              href="https://wa.me/918888888"
+              href="https://wa.me/918552832375"
               target="_blank"
               rel="noreferrer"
               className="cta-whatsapp-link"

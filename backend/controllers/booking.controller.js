@@ -1,6 +1,7 @@
 import Booking from "../models/Booking.js";
 
 export const createBooking = async (req, res) => {
+  const BUSINESS_PHONE = "918552832375";
   try {
     const booking = await Booking.create(req.body);
 
@@ -13,7 +14,7 @@ Plan: ${booking.planName}
 Price: ₹${booking.planPrice}
     `;
 
-    const whatsappUrl = `https://wa.me/${process.env.ADMIN_PHONE}?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(
       message,
     )}`;
 
