@@ -1,0 +1,102 @@
+.page-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Tablet & desktop */
+@media (min-width: 768px) {
+  .plans-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.plan-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-4px);
+}
+
+.plan-card .media {
+  position: relative;
+}
+
+.plan-card img,
+.plan-card video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.offer-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #f59e0b;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.plan-content {
+  padding: 16px;
+}
+
+.plan-content h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.price {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.plan-content button {
+  width: 100%;
+  padding: 12px;
+  background: #7c3aed;
+  color: white;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.plan-content button:hover {
+  background: #6d28d9;
+}
+
+.event-types {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.event-types button {
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 14px;
+}
+
+.event-types button.active {
+  background: #7c3aed;
+  color: white;
+  border-color: #7c3aed;
+}

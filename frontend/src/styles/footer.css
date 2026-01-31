@@ -1,0 +1,51 @@
+.footer {
+  background: #1f2933;
+  color: #e5e7eb;
+  margin-top: 60px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 40px 0;
+}
+
+/* BRAND */
+.footer-brand h3 {
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  max-width: 420px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* CONTACT */
+.footer-contact p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* BOTTOM BAR */
+.footer-bottom {
+  text-align: center;
+  padding: 12px 0;
+  background: #111827;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-brand p {
+    margin: auto;
+  }
+}

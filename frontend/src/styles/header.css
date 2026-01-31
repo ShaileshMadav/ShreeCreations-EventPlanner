@@ -1,0 +1,131 @@
+.header {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.whatsapp-link {
+  background: #22c55e;
+  color: white !important;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+/* Layout helpers */
+.header-spacer,
+.header-right {
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Brand */
+.brand {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.center-brand {
+  text-align: center;
+}
+
+/* Admin link */
+.admin-link {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.admin-link:hover {
+  background: #f3f4f6;
+}
+
+/* Mobile polish */
+@media (max-width: 640px) {
+  .brand {
+    font-size: 18px;
+  }
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7c3aed;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Hover feedback */
+.brand:hover {
+  color: #5b21b6;
+}
+
+/* Subtle underline animation */
+.brand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #7c3aed;
+  transition: width 0.25s ease;
+}
+
+.brand:hover::after {
+  width: 100%;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
