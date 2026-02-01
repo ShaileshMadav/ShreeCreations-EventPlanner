@@ -1,12 +1,11 @@
-const backendBaseUrl = import.meta.env.VITE_API_URL.replace("/api", "");
 const PlanCard = ({ plan, onBook }) => {
   return (
     <div className="plan-card">
       <div className="media">
         {plan.mediaType === "image" ? (
-          <img src={`${backendBaseUrl}${plan.mediaUrl}`} alt={plan.name} />
+          <img src={`${plan.mediaUrl}`} alt={plan.name} />
         ) : (
-          <video src={`${backendBaseUrl}${plan.mediaUrl}`} controls />
+          <video src={`${plan.mediaUrl}`} controls />
         )}
         {plan.offer && (
           <span className="offer-badge" hidden>

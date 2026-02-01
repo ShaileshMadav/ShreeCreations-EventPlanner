@@ -9,8 +9,17 @@ import { auth } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/", auth, upload.single("media"), createPlan);
+// ADMIN → create new plan (image/video upload)
+router.post(
+  "/",
+  auth,
+  upload.single("media"), // ⚠️ field name must be "media"
+  createPlan,
+);
+
+// PUBLIC → get all active plans
 router.get("/", getPlans);
+
 // ADMIN → update / disable plan
 router.put("/:id", auth, updatePlan);
 

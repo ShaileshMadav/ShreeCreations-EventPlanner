@@ -1,4 +1,5 @@
 import EventPlan from "../models/EventPlan.js";
+import supabase from "../config/supabase.js";
 
 export const createPlan = async (req, res) => {
   try {
@@ -12,32 +13,65 @@ export const createPlan = async (req, res) => {
       return res.status(400).json({ message: "Event type is required" });
     }
 
-    const mediaType = req.file.mimetype.startsWith("video") ? "video" : "image";
+    const file = req.file;
+    const mediaType = file.mimetype.startsWith("video") ? "video" : "image";
+
+    // generate unique filename
+    const fileExt = file.originalname.split(".").pop();
+    const fileName = `${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2)}.${fileExt}`;
+
+    // upload to Supabase Storage
+    const { error } = await supabase.storage
+      .from("shreecreations")
+      .upload(fileName, file.buffer, {
+        contentType: file.mimetype,
+      });
+
+    if (error) {
+      console.error("Supabase upload error:", error);
+      return res.status(500).json({ message: "File upload failed" });
+    }
+
+    // get public URL
+    const { data } = supabase.storage
+      .from("shreecreations")
+      .getPublicUrl(fileName);
 
     const plan = await EventPlan.create({
       name,
       price,
       offer,
       eventType,
-      mediaUrl: `/uploads/${req.file.filename}`,
+      mediaUrl: data.publicUrl, // ✅ persistent URL
       mediaType,
+      isActive: true,
     });
 
-    res.status(201).json(plan);
+    res.status(201).json({
+      message: "Plan created successfully",
+      data: plan,
+    });
   } catch (err) {
+    console.error("Create plan error:", err);
     res.status(500).json({ message: err.message });
   }
 };
 
 export const getPlans = async (req, res) => {
-  const filter = { isActive: true };
-  if (req.query.eventType) {
-    filter.eventType = req.query.eventType;
+  try {
+    const filter = { isActive: true };
+
+    if (req.query.eventType) {
+      filter.eventType = req.query.eventType;
+    }
+
+    const plans = await EventPlan.find(filter).sort({ createdAt: -1 });
+    res.json(plans);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
-  const plans = await EventPlan.find({ isActive: true }).sort({
-    createdAt: -1,
-  });
-  res.json(plans);
 };
 
 export const updatePlan = async (req, res) => {
